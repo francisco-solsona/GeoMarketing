@@ -1,0 +1,423 @@
+body { margin: 0; 
+    padding: 0; 
+    font-family: 'Montserrat', sans-serif; 
+} /* Estilos básicos del cuerpo */
+
+#map { position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 0;
+    width: 100%
+ } /* Estilos para el mapa ocupando toda la pantalla */
+
+/* //////////////////////////////////////
+//////// FUNCION PARA EL HEADER ////////
+////////////////////////////////////// */
+.header {
+    position: relative;
+    text-align: center;
+    width: 25%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+    z-index: 10;
+    height: 110px;
+    border-bottom-right-radius: 10px; 
+}
+.header h1 {
+    position: absolute;
+    font-size: 26px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    margin: 0;
+    display: flex; /* Flexbox para alinear logo y texto */
+    align-items: center; /* Alinear verticalmente el logo y el texto */
+    text-align: center;
+}
+.logo {
+    width: 200px; /* Ajusta el tamaño del logo */
+    height: auto;
+    margin-right: 0px; /* Espacio entre el texto y el logo */
+    padding-left: 20px; /* Ajusta el valor según lo necesites */
+}
+.geodata-link {
+    font-family: 'Montserrat', sans-serif; /* Cambia el tipo de letra de las opciones */
+    color: white; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    font-size: 42px; /* Tamaño de fuente */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s; /* Transición suave para cambios de color */
+}
+.header h1 div {
+    display: block; /* Hace que el div se comporte como un bloque */
+    margin-top: 0px; /* Ajusta el margen superior para separarlo del h1 */
+    text-align: center; /* Centra el texto en el botón */
+}
+/* //////////////////////////////////////////////
+///////// FUNCION PARA ICONOS DEL MENU //////////
+////////////////////////////////////////////// */
+.maki-icon {
+    width: 42px; /* Ajusta el tamaño según tus necesidades */
+    height: auto; /* Mantiene la proporción */
+    filter: invert(100%); /* Cambia el color a blanco */
+}
+
+.icon-bar-chart {
+    font-size: 36px; /* Ajusta el tamaño del ícono */
+    color: #ffffff;  /* Cambia el color */
+}
+
+.icon-share-alt {
+    font-size: 36px; /* Ajusta el tamaño del ícono */
+    color: #ffffff;  /* Cambia el color */
+}
+
+.icon-download-alt {
+    font-size: 36px; /* Ajusta el tamaño del ícono */
+    color: #ffffff;  /* Cambia el color */
+}
+
+.icon-table {
+    font-size: 36px; /* Ajusta el tamaño del ícono */
+    color: #ffffff;  /* Cambia el color */
+}
+
+/* Estilo para íconos dentro de submenu-items */
+.submenu-item i {
+    margin-right: 10px; /* Espacio entre ícono y texto */
+    margin-left: 10px; 
+}
+
+/* Ajustes para íconos en submenús */
+.submenu .submenu-item i {
+    font-size: 20px;
+    margin-left: 10px; 
+}
+
+/* Ajustes para imágenes en submenús */
+.submenu .submenu-item img {
+    width: 20px; /* Ajusta el tamaño según tus necesidades */
+    height: auto; /* Mantiene la proporción */
+    filter: invert(100%); /* Cambia el color a blanco */
+    margin-right: 10px;
+}
+
+/* Flexbox para submenu-item y alineación horizontal */
+.submenu .submenu-item {
+    display: flex; /* Activa el diseño flexbox */
+    align-items: center; /* Alinea verticalmente el ícono y el texto */
+    gap: 10px; /* Espaciado uniforme entre el ícono y el texto */
+    padding: 5px 10px; /* Añade algo de espacio interno para un mejor diseño */
+    justify-content: flex-start; /* Asegura que ícono y texto se alineen a la izquierda */
+    text-align: left; /* Asegura que el texto no se centre */
+}
+
+.submenu .submenu-item i,
+.submenu .submenu-item img {
+    flex-shrink: 0; /* Evita que el ícono o la imagen se reduzcan si hay mucho texto */
+}
+
+
+/* //////////////////////////////////////
+///////// MENU DE CAPAS Y SIMBOLOGIA //////////
+////////////////////////////////////// */
+.layer-control {
+    position: fixed; /* Mantiene la posición fija */
+    bottom: 5%; /* Distancia desde la parte inferior */
+    left: 0.5%; /* Distancia desde el lado izquierdo */
+    z-index: 1000; /* Sobre otros elementos */
+    display: flex; /* Alinea los elementos en fila */
+    flex-direction: row; /* Mantén los botones en una fila */
+    gap: 10px; /* Espaciado entre botones */
+}
+
+.layer-button {
+    width: 40px; /* Ajusta el tamaño deseado */
+    height: 40px; /* Hace que el botón sea cuadrado */
+    background-color: black; /* Fondo negro */
+    border: none; /* Sin bordes */
+    border-radius: 50%; /* Botones redondos */
+    display: flex; /* Centra el contenido */
+    align-items: center; /* Alinea verticalmente */
+    justify-content: center; /* Alinea horizontalmente */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+.layer-button img {
+    width: 30px; /* Ajusta el tamaño del ícono */
+    height: auto; /* Mantiene la proporción */
+    filter: invert(100%); /* Cambia el color a blanco */
+}
+
+.layer-button:hover {
+    background-color: #555; /* Fondo más claro al pasar el mouse */
+}
+
+.layer-button[data-tooltip]:hover::after {
+    content: attr(data-tooltip); /* Muestra el texto del atributo data-tooltip */
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1001;
+}
+#base-map-toggle {
+    width: 40px; /* Ajusta el tamaño deseado */
+    height: 40px; /* Hace que el botón sea cuadrado */
+    font-size: 24px; /* Aumenta el tamaño del ícono o texto */
+    border-radius: 50%; /* Opcional: convierte el botón en un círculo */
+    align-items: center;
+    justify-content: center;
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    padding-bottom: 4.5px;
+}
+/* //////////////////////////////////////
+///////// FUNCION PARA EL MENU //////////
+////////////////////////////////////// */
+.side-tabs {
+    position: relative;
+    left: 0;
+    height: calc(100% - 100px); /* Ajusta la altura para no sobrepasar la cabecera */
+    width: 75px; /* Ajusta el ancho según prefieras */
+    opacity: 0.9;
+    background-color: black;
+    overflow: visible; /* Esconde el contenido del menú cuando está contraído */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+    transition: 1s;
+    z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+    padding: 10px;
+    margin-right: 10px;
+    border-bottom-left-radius: 10px; /* Redondea la esquina inferior izquierda */
+    border-bottom-right-radius: 10px; /* Redondea la esquina inferior derecha */
+}
+.side-tabs .tab-button:not(#menu-toggle) {
+    display: none;
+}
+.side-tabs .tab-button {
+    align-items: center; 
+    position: relative; /* Necesario para posicionar el tooltip */
+}
+.side-tabs .tab-button label {
+    margin-right: 5px; 
+}
+.side-tabs select {
+    margin-top: 10px;
+    width: 75px; /* Ajusta el ancho del select como prefieras */
+}
+.side-tabs .tab-button::after {
+    content: attr(data-tooltip); /* Muestra el contenido del atributo data-tooltip */
+    position: absolute;
+    bottom: 100%; /* Posiciona el tooltip encima del botón */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none; /* Hace que el tooltip no interfiera con otros eventos */
+    font-size: 12px;
+    margin-left: 20px; /* Añade un pequeño espacio entre el botón y el tooltip */
+    z-index: 9999; /* Asegura que el tooltip esté en el frente y no sea cortado */
+}
+.side-tabs .tab-button:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+.tab-button {
+    display: block;
+    width: 95%;
+    padding: 10px; 
+    text-align: center;
+    border: none;
+    opacity: 1;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+.tab-button:hover {
+    background-color: #575757;
+    border-radius: 20px; /* Redondea la esquina inferior izquierda */
+}
+.tab-button.active {
+    background-color: #575757; /* Color de fondo cuando el botón está activo */
+    border-radius: 20px; /* Redondea la esquina inferior izquierda */
+}
+#menu-toggle {
+    font-size: 36px; /* Tamaño de la fuente */
+    padding: 0px; /* Espaciado interno */
+    cursor: pointer;
+    border: 0px solid #575757; /* Borde del botón */
+    background-color: black;
+    text-align: center; /* Centra el texto en el botón */
+    margin-right: 20px;
+}
+
+/* ///////////////////////////////////////
+/// FUNCION PARA EL CONTENEDOR DE INFO ///
+/////////////////////////////////////// */
+.tab-button-container {
+    position: relative;
+}
+/* Hover para las opciones del submenú */
+.submenu-item:hover {
+    background-color: #555;
+}
+/* Muestra el submenú al hacer hover en el botón específico */
+.tab-button-container:hover .submenu {
+    display: block;
+    opacity: 1; /* Aparece gradualmente */
+    transform: translateX(10px); /* Se desplaza hacia la derecha */
+}
+.info-container {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    opacity: 0.9;
+    background-color: black;
+    border-radius: 10px;
+    color: #f2f2f2;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 10px 0 0; /* Margen superior para no superponerse con la cabecera */
+    position: fixed;
+    top: 10px; /* Ajusta la posición desde el borde superior de la pantalla */
+    right: 10px; /* Ajusta la posición desde el borde izquierdo, considerando el ancho de .side-tabs */
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 90%; /* Puedes ajustar la altura según tus necesidades */
+    max-width: 35%;
+    resize: horizontal; /* Permite redimensionar horizontalmente */
+    overflow-y: auto;
+    transition: margin-left 0.5s; /* Animación suave para el desplazamiento */
+    padding: 20px;   
+}
+
+/* //////////////////////////////////////
+// FUNCION PARA MANIPULAR EL SUBMENU //
+////////////////////////////////////// */
+ .submenu {
+    opacity: 0;
+    pointer-events: all;
+    position: absolute;
+    left: 75px; /* Alineado a la derecha del botón */
+    top: 0;
+    width: 150px;
+    max-width: 250px;
+    background-color: #222222;
+    border: 1px solid #444;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    /* border-radius: 10px; */
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+/* Estilos del título del submenú */
+.submenu-title {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #555;
+    /* border-radius: 10px; */
+    border-top-right-radius: 10px;
+    /* border-bottom-right-radius: 10px; */
+}
+/* Estilos para las opciones del submenú */
+.submenu-item {
+    display: block;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; 
+}
+
+/* //////////////////////////////////////////////
+// FUNCION PARA EDITAR LA TABLA DE INFORMACION //
+////////////////////////////////////////////// */
+.points-table {
+    width: auto; /* La tabla se ajustará al tamaño de su contenido */
+    table-layout: auto; /* Permite que las columnas se ajusten a su contenido */
+    border-collapse: collapse; /* Para que las celdas compartan bordes */
+    margin: 10px 0; /* Espaciado alrededor de la tabla */
+    opacity: 0.9;
+    background-color: #222222;
+    color: #ffffff;
+}
+.points-table th, .points-table td {
+    padding: 8px; /* Espaciado interno en las celdas */
+    text-align: center; /* Alinear el texto a la izquierda (puedes cambiar a 'center' si prefieres) */
+    border: 1px solid #ddd; /* Bordes suaves alrededor de las celdas */
+    
+}
+.points-table th {
+    background-color: #f2f2f2; /* Fondo más claro para los encabezados */
+    font-weight: bold; /* Negrita para los encabezados */
+    opacity: 0.9;
+    background-color: black;
+    color: #ffffff;
+} 
+.sort-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 5px;
+    font-weight: bold; /* Negrita para los encabezados */
+    color: #ffffff;
+}
+.sort-btn.asc::before {
+    content: '\2191'; /* Flecha hacia arriba */
+}
+.sort-btn.desc::before {
+    content: '\2193'; /* Flecha hacia abajo */
+}
+/* //////////////////////////////////////////////////////////////////// */
+/* Aquí vamos a determinar cuales son los límites del área de estudio.  */
+/* //////////////////////////////////////////////////////////////////// */
+.chart-container-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Crear 2 columnas */
+    grid-gap: 20px; /* Espacio entre los gráficos */
+    margin-top: 30px;
+}
+
+.chart-container-wrapper canvas {
+    width: 100%; /* Asegura que los gráficos se adapten al contenedor */
+    height: 150px; /* Altura fija para cada gráfico */
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 20px; /* Espacio entre el título y el gráfico */
+}
